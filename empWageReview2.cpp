@@ -30,33 +30,44 @@ class WorkingHrs {
 		return empHrs;
 	}
 
-	friend int totalWorkingHrs(WorkingHrs wh);
+	friend class EmployeeWage;
 };
 
-int totalWorkingHrs(WorkingHrs wh) {
-	const int NUM_OF_WORKING_DAYS = 20;
-	const int TOTAL_WORKING_HRS = 100;
+class EmployeeWage {
+	int numOfWorkingDays;
+	int numOfWorkingHrs;
+	int wagePerHr;
+
 	int workingDay = 0;
 	int totalEmpHrs = 0;
 	int workingHr = 0;
 
-	while (workingDay <= NUM_OF_WORKING_DAYS && workingHr <= TOTAL_WORKING_HRS) {
-		totalEmpHrs += wh.calculateHrs();
-		workingDay ++;
+	public:
+	EmployeeWage(int workingDays, int workingHrs, int wage)
+	{
+		numOfWorkingDays = workingDays;
+		numOfWorkingHrs = workingHrs;
+		wagePerHr = wage;
 	}
-	return totalEmpHrs;
-}
 
-void empWage(int wagePerHour) {
-	WorkingHrs wh;
-	int monthlyWage = totalWorkingHrs(wh) * wagePerHour;
-   cout << "monthly wage is " << monthlyWage;
-}
+	public:
+	void calculateWage(WorkingHrs wh) {
+		while (workingDay <= numOfWorkingDays && workingHr <= numOfWorkingHrs)
+		{
+			totalEmpHrs += wh.calculateHrs();
+			workingDay ++;
+		}
+		int monthlyWage = totalEmpHrs * wagePerHr;
+		cout << "Monthly wage is " << monthlyWage;
+	}
+};
 
 
 int main() {
 	cout << "Welcome to Employee Wage Computation " << endl;
 
-	empWage(30);
+	WorkingHrs wh;
+	EmployeeWage employeeWage(20, 100, 30);
+	employeeWage.calculateWage(wh);
 	return 0;
 }
