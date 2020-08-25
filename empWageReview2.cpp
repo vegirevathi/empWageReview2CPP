@@ -47,10 +47,9 @@ int totalWorkingHrs(WorkingHrs wh) {
 	return totalEmpHrs;
 }
 
-void empWage() {
-	int WAGE_PER_HOUR = 20;
+void empWage(int wagePerHour) {
 	WorkingHrs wh;
-	int monthlyWage = totalWorkingHrs(wh) * WAGE_PER_HOUR;
+	int monthlyWage = totalWorkingHrs(wh) * wagePerHour;
    cout << "monthly wage is " << monthlyWage;
 }
 
@@ -58,6 +57,6 @@ void empWage() {
 int main() {
 	cout << "Welcome to Employee Wage Computation " << endl;
 
-	empWage();
+	empWage(30);
 	return 0;
 }
