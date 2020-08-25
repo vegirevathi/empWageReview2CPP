@@ -37,14 +37,16 @@ class EmployeeWage {
 	int numOfWorkingDays;
 	int numOfWorkingHrs;
 	int wagePerHr;
+	string companyName;
 
 	int workingDay = 0;
 	int totalEmpHrs = 0;
 	int workingHr = 0;
 
 	public:
-	EmployeeWage(int workingDays, int workingHrs, int wage)
+	EmployeeWage(string company, int workingDays, int workingHrs, int wage)
 	{
+		companyName = company;
 		numOfWorkingDays = workingDays;
 		numOfWorkingHrs = workingHrs;
 		wagePerHr = wage;
@@ -58,7 +60,7 @@ class EmployeeWage {
 			workingDay ++;
 		}
 		int monthlyWage = totalEmpHrs * wagePerHr;
-		cout << "Monthly wage is " << monthlyWage;
+		cout << "Monthly wage for company " << companyName << " is " << monthlyWage << endl;
 	}
 };
 
@@ -67,7 +69,9 @@ int main() {
 	cout << "Welcome to Employee Wage Computation " << endl;
 
 	WorkingHrs wh;
-	EmployeeWage employeeWage(20, 100, 30);
-	employeeWage.calculateWage(wh);
+	EmployeeWage e1 = EmployeeWage("DMART", 20, 100, 20);
+	e1.calculateWage(wh);
+	EmployeeWage e2 = EmployeeWage("Reliance", 25, 120, 30);
+	e2.calculateWage(wh);
 	return 0;
 }
