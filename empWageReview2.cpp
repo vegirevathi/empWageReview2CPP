@@ -14,18 +14,18 @@ class WorkingHrs {
 
 		switch (empStatus)
 		{
-		case FULL_TIME:
-      	cout << "Employee is Full Time Present " << endl;
-			empHrs = 8;
-			break;
-   	case PART_TIME:
-			cout << "Employee is Part Time Present " << endl;
-			empHrs = 4;
-			break;
-		default:
-      	cout << "Employee is Absent " << endl;
-			empHrs = 0;
-			break;
+			case FULL_TIME:
+   	   	cout << "Employee is Full Time Present " << endl;
+				empHrs = 8;
+				break;
+   		case PART_TIME:
+				cout << "Employee is Part Time Present " << endl;
+				empHrs = 4;
+				break;
+			default:
+      		cout << "Employee is Absent " << endl;
+				empHrs = 0;
+				break;
    	}
 		return empHrs;
 	}
@@ -34,11 +34,13 @@ class WorkingHrs {
 };
 
 int totalWorkingHrs(WorkingHrs wh) {
-	int numOfWorkingDays = 20;
+	const int NUM_OF_WORKING_DAYS = 20;
+	const int TOTAL_WORKING_HRS = 100;
 	int workingDay = 0;
 	int totalEmpHrs = 0;
+	int workingHr = 0;
 
-	while (workingDay <= numOfWorkingDays) {
+	while (workingDay <= NUM_OF_WORKING_DAYS && workingHr <= TOTAL_WORKING_HRS) {
 		totalEmpHrs += wh.calculateHrs();
 		workingDay ++;
 	}
