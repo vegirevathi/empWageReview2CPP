@@ -10,13 +10,12 @@ class WorkingHrs {
 		const int FULL_TIME = 1;
 		const int PART_TIME = 2;
 
-		srand(time(NULL));
    	int empStatus = rand() % 3;
 
 		switch (empStatus)
 		{
 		case FULL_TIME:
-      	cout << " Employee is Full Time Present " << endl;
+      	cout << "Employee is Full Time Present " << endl;
 			empHrs = 8;
 			break;
    	case PART_TIME:
@@ -31,20 +30,32 @@ class WorkingHrs {
 		return empHrs;
 	}
 
-	friend void empWage(WorkingHrs wh);
+	friend int totalWorkingHrs(WorkingHrs wh);
 };
 
-void empWage(WorkingHrs wh) {
+int totalWorkingHrs(WorkingHrs wh) {
+	int numOfWorkingDays = 20;
+	int workingDay = 0;
+	int totalEmpHrs = 0;
+
+	while (workingDay <= numOfWorkingDays) {
+		totalEmpHrs += wh.calculateHrs();
+		workingDay ++;
+	}
+	return totalEmpHrs;
+}
+
+void empWage() {
 	int WAGE_PER_HOUR = 20;
-	int dailyWage = wh.calculateHrs() * WAGE_PER_HOUR;
-   cout << "Daily wage is " << dailyWage;
+	WorkingHrs wh;
+	int monthlyWage = totalWorkingHrs(wh) * WAGE_PER_HOUR;
+   cout << "monthly wage is " << monthlyWage;
 }
 
 
 int main() {
 	cout << "Welcome to Employee Wage Computation " << endl;
 
-	WorkingHrs wh;
-	empWage(wh);
+	empWage();
 	return 0;
 }
