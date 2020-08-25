@@ -3,19 +3,23 @@
 using namespace std;
 
 class WorkingHrs {
-	private:
 	int empHrs;
-   int empStatus = rand() % 3;
 
 	private:
 	int calculateHrs() {
+		const int FULL_TIME = 1;
+		const int PART_TIME = 2;
+
+		srand(time(NULL));
+   	int empStatus = rand() % 3;
+
 		switch (empStatus)
 		{
-		case 1:
+		case FULL_TIME:
       	cout << " Employee is Full Time Present " << endl;
 			empHrs = 8;
 			break;
-   	case 2:
+   	case PART_TIME:
 			cout << "Employee is Part Time Present " << endl;
 			empHrs = 4;
 			break;
