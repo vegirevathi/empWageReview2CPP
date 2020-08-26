@@ -2,8 +2,14 @@
 #include <ctime>
 using namespace std;
 
+class EmployeeWage
+{
+	public:
+	virtual int calculateHrs() = 0;
+};
 
-class WorkingHrs
+
+class WorkingHrs : EmployeeWage
 {
 	int empHrs;
 
@@ -53,7 +59,8 @@ class EmployeeWageBuilder
 		this->wagePerHr = wage;
 	}
 
-   void calculateWage(WorkingHrs wh) {
+   void calculateWage() {
+		WorkingHrs wh;
       while (workingDay <= numOfWorkingDays && workingHr <= numOfWorkingHrs)
       {
          totalEmpHrs += wh.calculateHrs();
@@ -67,10 +74,9 @@ class EmployeeWageBuilder
 int main() {
 	cout << "Welcome to Employee Wage Computation " << endl;
 
-	WorkingHrs wh;
 	EmployeeWageBuilder e1 = EmployeeWageBuilder("DMART", 20, 100, 20);
-	e1.calculateWage(wh);
+	e1.calculateWage();
 	EmployeeWageBuilder e2 = EmployeeWageBuilder("Reliance", 25, 120, 30);
-	e2.calculateWage(wh);
+	e2.calculateWage();
 	return 0;
 }
