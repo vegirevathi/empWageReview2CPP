@@ -31,48 +31,28 @@ class WorkingHrs
    	}
 		return empHrs;
 	}
-
-	//friend class EmployeeWage;
 };
 
-class EmployeeWageBuilder1
+class EmployeeWageBuilder
 {
-	int numOfWorkingDays = 20;
-	int numOfWorkingHrs = 100;
-	int wagePerHr = 20;
-	string companyName = "DMART";
-
-	int workingDay = 0;
-	int totalEmpHrs = 0;
-	int workingHr = 0;
-
-
 	public:
-	void calculateWage(WorkingHrs wh) {
-		while (workingDay <= numOfWorkingDays && workingHr <= numOfWorkingHrs)
-		{
-			totalEmpHrs += wh.calculateHrs();
-			workingDay ++;
-		}
-		int monthlyWage = totalEmpHrs * wagePerHr;
-		cout << "Monthly wage for company " << companyName << " is " << monthlyWage << endl;
-	}
-};
-
-
-class EmployeeWageBuilder2
-{
-   int numOfWorkingDays = 25;
-   int numOfWorkingHrs = 120;
-   int wagePerHr = 25;
-   string companyName = "Reliance";
+   int numOfWorkingDays;
+   int numOfWorkingHrs;
+   int wagePerHr;
+   string companyName;
 
    int workingDay = 0;
    int totalEmpHrs = 0;
    int workingHr = 0;
 
+	EmployeeWageBuilder(string company, int workingDays, int workingHrs, int wage)
+	{
+		this->companyName = company;
+		this->numOfWorkingHrs = workingHrs;
+		this->numOfWorkingDays = workingDays;
+		this->wagePerHr = wage;
+	}
 
-   public:
    void calculateWage(WorkingHrs wh) {
       while (workingDay <= numOfWorkingDays && workingHr <= numOfWorkingHrs)
       {
@@ -88,9 +68,9 @@ int main() {
 	cout << "Welcome to Employee Wage Computation " << endl;
 
 	WorkingHrs wh;
-	EmployeeWageBuilder1 e1;
+	EmployeeWageBuilder e1 = EmployeeWageBuilder("DMART", 20, 100, 20);
 	e1.calculateWage(wh);
-	EmployeeWageBuilder2 e2;
+	EmployeeWageBuilder e2 = EmployeeWageBuilder("Reliance", 25, 120, 30);
 	e2.calculateWage(wh);
 	return 0;
 }
