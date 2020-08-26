@@ -42,14 +42,10 @@ class WorkingHrs : EmployeeWage
 class EmployeeWageBuilder
 {
 	public:
+   string companyName;
    int numOfWorkingDays;
    int numOfWorkingHrs;
    int wagePerHr;
-   string companyName;
-
-   int workingDay = 0;
-   int totalEmpHrs = 0;
-   int workingHr = 0;
 
 	EmployeeWageBuilder(string company, int workingDays, int workingHrs, int wage)
 	{
@@ -58,25 +54,29 @@ class EmployeeWageBuilder
 		this->numOfWorkingDays = workingDays;
 		this->wagePerHr = wage;
 	}
-
-   void calculateWage() {
-		WorkingHrs wh;
-      while (workingDay <= numOfWorkingDays && workingHr <= numOfWorkingHrs)
-      {
-         totalEmpHrs += wh.calculateHrs();
-         workingDay ++;
-      }
-      int monthlyWage = totalEmpHrs * wagePerHr;
-      cout << "Monthly wage for company " << companyName << " is " << monthlyWage << endl;
-   }
 };
+
+void calculateWage(EmployeeWageBuilder e) {
+	int workingDay = 0;
+	int totalEmpHrs = 0;
+	int workingHr = 0;
+
+	WorkingHrs wh;
+   while (workingDay <= e.numOfWorkingDays && workingHr <= e.numOfWorkingHrs)
+   {
+      totalEmpHrs += wh.calculateHrs();
+      workingDay ++;
+   }
+   int monthlyWage = totalEmpHrs * e.wagePerHr;
+   cout << "Monthly wage for company " << e.companyName << " is " << monthlyWage << endl;
+}
 
 int main() {
 	cout << "Welcome to Employee Wage Computation " << endl;
 
 	EmployeeWageBuilder e1 = EmployeeWageBuilder("DMART", 20, 100, 20);
-	e1.calculateWage();
+	calculateWage(e1);
 	EmployeeWageBuilder e2 = EmployeeWageBuilder("Reliance", 25, 120, 30);
-	e2.calculateWage();
+	calculateWage(e2);
 	return 0;
 }
