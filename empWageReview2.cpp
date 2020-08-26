@@ -2,10 +2,12 @@
 #include <ctime>
 using namespace std;
 
-class WorkingHrs {
+
+class WorkingHrs
+{
 	int empHrs;
 
-	private:
+	public:
 	int calculateHrs() {
 		const int FULL_TIME = 1;
 		const int PART_TIME = 2;
@@ -30,27 +32,20 @@ class WorkingHrs {
 		return empHrs;
 	}
 
-	friend class EmployeeWage;
+	//friend class EmployeeWage;
 };
 
-class EmployeeWage {
-	int numOfWorkingDays;
-	int numOfWorkingHrs;
-	int wagePerHr;
-	string companyName;
+class EmployeeWageBuilder1
+{
+	int numOfWorkingDays = 20;
+	int numOfWorkingHrs = 100;
+	int wagePerHr = 20;
+	string companyName = "DMART";
 
 	int workingDay = 0;
 	int totalEmpHrs = 0;
 	int workingHr = 0;
 
-	public:
-	EmployeeWage(string company, int workingDays, int workingHrs, int wage)
-	{
-		companyName = company;
-		numOfWorkingDays = workingDays;
-		numOfWorkingHrs = workingHrs;
-		wagePerHr = wage;
-	}
 
 	public:
 	void calculateWage(WorkingHrs wh) {
@@ -65,13 +60,37 @@ class EmployeeWage {
 };
 
 
+class EmployeeWageBuilder2
+{
+   int numOfWorkingDays = 25;
+   int numOfWorkingHrs = 120;
+   int wagePerHr = 25;
+   string companyName = "Reliance";
+
+   int workingDay = 0;
+   int totalEmpHrs = 0;
+   int workingHr = 0;
+
+
+   public:
+   void calculateWage(WorkingHrs wh) {
+      while (workingDay <= numOfWorkingDays && workingHr <= numOfWorkingHrs)
+      {
+         totalEmpHrs += wh.calculateHrs();
+         workingDay ++;
+      }
+      int monthlyWage = totalEmpHrs * wagePerHr;
+      cout << "Monthly wage for company " << companyName << " is " << monthlyWage << endl;
+   }
+};
+
 int main() {
 	cout << "Welcome to Employee Wage Computation " << endl;
 
 	WorkingHrs wh;
-	EmployeeWage e1 = EmployeeWage("DMART", 20, 100, 20);
+	EmployeeWageBuilder1 e1;
 	e1.calculateWage(wh);
-	EmployeeWage e2 = EmployeeWage("Reliance", 25, 120, 30);
+	EmployeeWageBuilder2 e2;
 	e2.calculateWage(wh);
 	return 0;
 }
